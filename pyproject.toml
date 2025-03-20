@@ -1,0 +1,11 @@
+[project]
+name = "m0use"
+version = "0.1.0"
+description = "a eurocore helper script to identify and telegram nations in a region that have recruitment telegrams enabled"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "bs4>=0.0.2",
+    "lxml>=5.3.1",
+    "requests>=2.32.3",
+]
