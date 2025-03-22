@@ -193,7 +193,7 @@ def send_telegrams(
                 "id": telegram_id,
                 "secret_key": telegram_key,
                 "recipient": nation,
-                "telegram_type": "standard",
+                "tg_type": "standard",
             }
         )
 
