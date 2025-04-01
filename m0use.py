@@ -190,7 +190,7 @@ def send_telegrams(
         telegrams.append(
             {
                 "sender": "the_europeian_government",
-                "id": telegram_id,
+                "id": str(telegram_id),
                 "secret_key": telegram_key,
                 "recipient": nation,
                 "tg_type": "standard",
