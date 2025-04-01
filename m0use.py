@@ -61,7 +61,7 @@ def parse_args() -> Cli:
     )
 
     parser.add_argument(
-        "-p", "--password", type=str, required=True, help="eurocore password"
+        "-p", "--eurocore-password", type=str, required=True, help="eurocore password"
     )
 
     parser.add_argument(
@@ -180,9 +180,9 @@ def send_telegrams(
 
     data = {"username": user, "password": password}
 
-    token = requests.post(url=login_url, data=data).json()["token"]
+    token = requests.post(url=login_url, json=data).json()["token"]
 
-    headers = {"Authentication", f"Bearer: {token}"}
+    headers = {"Authorization": f"Bearer: {token}"}
 
     telegrams = []
 
