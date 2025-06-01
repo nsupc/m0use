@@ -163,3 +163,4 @@ cython_debug/
 exclusions.txt
 justfile
 .ruff_cache
+config.yml

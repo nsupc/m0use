@@ -1,0 +1,16 @@
+---
+user: 
+region: 
+telegram:
+  id: 
+  key: 
+eurocore:
+  url: 
+  user: 
+  password: 
+request_rate: 
+cache_results: 
+log:
+  token:
+  endpoint:
+  level: 
