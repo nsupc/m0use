@@ -2,6 +2,7 @@ package ns
 
 import (
 	"errors"
+	"fmt"
 	"log/slog"
 	"net/http"
 	"strconv"
@@ -110,6 +111,10 @@ func (c *Client) Do(req *http.Request) (*http.Response, error) {
 		} else {
 			c.ratelimitResetIn = time.Duration(reset)
 		}
+	}
+
+	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
+		return nil, errors.New(fmt.Sprintf("request failed with status %s", resp.Status))
 	}
 
 	return resp, nil
