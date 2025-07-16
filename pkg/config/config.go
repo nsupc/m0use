@@ -33,7 +33,7 @@ func (t *Telegram) validate() error {
 
 type Eurocore struct {
 	Url      string `yaml:"url"`
-	Username string `json:"username"`
+	Username string `json:"user"`
 	Password string `json:"password"`
 }
 
