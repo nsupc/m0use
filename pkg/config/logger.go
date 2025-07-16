@@ -33,5 +33,6 @@ func InitLogger(c *Config) {
 		logger = slog.Default()
 	}
 
+	slog.SetLogLoggerLevel(logLevel)
 	slog.SetDefault(logger)
 }
