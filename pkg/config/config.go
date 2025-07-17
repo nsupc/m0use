@@ -10,22 +10,15 @@ import (
 )
 
 type Telegram struct {
-	Id     int    `yaml:"id"`
-	Key    string `yaml:"key"`
-	Author string `yaml:"author"`
+	Template string `yaml:"template"`
+	Id       int    `yaml:"id"`
+	Key      string `yaml:"key"`
+	Author   string `yaml:"author"`
 }
 
 func (t *Telegram) validate() error {
-	if t.Id == 0 {
-		return errors.New("telegram id not set")
-	}
-
-	if t.Key == "" {
-		return errors.New("telegram key not set")
-	}
-
-	if t.Author == "" {
-		return errors.New("telegram author not set")
+	if t.Template == "" && (t.Id == 0 || t.Key == "" || t.Author == "") {
+		return errors.New("either telegram template or id, key, and author must be set")
 	}
 
 	return nil
