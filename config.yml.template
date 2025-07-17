@@ -2,14 +2,19 @@
 user: 
 region: 
 telegram:
-  id: 
-  key: 
+  template: 
+  id:
+  key:
+  author:
 eurocore:
   url: 
   user: 
   password: 
 request_rate: 
-cache_results: 
+cache:
+  active: 
+  cache_dir: 
+  cache_file: 
 log:
   token:
   endpoint:
