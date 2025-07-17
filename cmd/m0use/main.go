@@ -73,7 +73,7 @@ func main() {
 			telegram := models.NewTelegram{
 				Sender:    template.Nation,
 				Recipient: recipient,
-				Id:        template.Id,
+				Id:        strconv.Itoa(template.Tgid),
 				Secret:    template.Key,
 				Type:      "standard",
 			}
