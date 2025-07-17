@@ -9,4 +9,5 @@ require (
 	github.com/samber/slog-betterstack v1.4.2 // indirect
 	github.com/samber/slog-common v0.18.1 // indirect
 	golang.org/x/text v0.16.0 // indirect
+	golang.org/x/time v0.12.0 // indirect
 )
