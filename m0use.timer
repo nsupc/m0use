@@ -1,0 +1,10 @@
+[Unit]
+Description=monthly m0use run
+
+[Timer]
+OnCalendar=monthly
+RandomizedDelaySec=12h
+Persistent=true
+
+[Install]
+WantedBy=multi-user.target

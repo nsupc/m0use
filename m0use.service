@@ -1,0 +1,14 @@
+[Unit]
+Description=m0use - NationStates recruitment disable campaign manager
+After=network.target
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/local/bin/m0use /etc/m0use-config.yml
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=m0use
