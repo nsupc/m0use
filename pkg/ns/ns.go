@@ -6,6 +6,7 @@ import (
 	"io"
 	"log/slog"
 	"net/http"
+	"slices"
 	"strings"
 )
 
@@ -65,7 +66,7 @@ func (c *Client) GetNations(regionName string) ([]string, error) {
 	return r.Nations, nil
 }
 
-func (c *Client) GetRecruitmentEligibleNations(inRegion string, fromRegion string) ([]string, error) {
+func (c *Client) GetRecruitmentEligibleNations(inRegion string, fromRegion string, ignore []string) ([]string, error) {
 	nations, err := c.GetNations(inRegion)
 	if err != nil {
 		return nil, err
@@ -74,12 +75,18 @@ func (c *Client) GetRecruitmentEligibleNations(inRegion string, fromRegion strin
 	result := []string{}
 
 	for _, nationName := range nations {
-		slog.Debug("checking recruitment eligibility status", slog.String("nation", nationName))
+		if slices.Contains(ignore, nationName) {
+			slog.Debug("nation in ignore list; skipping", slog.String("nation", nationName))
+			continue
+		}
+
 		status, err := c.IsRecruitmentEligible(nationName, fromRegion)
 		if err != nil {
 			slog.Warn("unable to get recruitment eligibility status", slog.String("nation", nationName), slog.Any("error", err))
 			continue
 		}
+
+		slog.Debug("recrutiment status", slog.String("nation", nationName), slog.Any("status", status))
 
 		if status.CanRecruit {
 			result = append(result, nationName)
