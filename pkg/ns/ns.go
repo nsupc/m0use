@@ -66,13 +66,11 @@ func (c *Client) GetNations(regionName string) ([]string, error) {
 	return r.Nations, nil
 }
 
-func (c *Client) GetRecruitmentEligibleNations(inRegion string, fromRegion string, ignore []string) ([]string, error) {
+func (c *Client) GetRecruitmentEligibleNations(inRegion string, fromRegion string, ignore []string) (eligible []string, ineligible []string, err error) {
 	nations, err := c.GetNations(inRegion)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
-
-	result := []string{}
 
 	for _, nationName := range nations {
 		if slices.Contains(ignore, nationName) {
@@ -82,16 +80,18 @@ func (c *Client) GetRecruitmentEligibleNations(inRegion string, fromRegion strin
 
 		status, err := c.IsRecruitmentEligible(nationName, fromRegion)
 		if err != nil {
-			slog.Warn("unable to get recruitment eligibility status", slog.String("nation", nationName), slog.Any("error", err))
+			slog.Warn("unable to get recruitment status", slog.String("nation", nationName), slog.Any("error", err))
 			continue
 		}
 
-		slog.Debug("recrutiment status", slog.String("nation", nationName), slog.Any("status", status))
+		slog.Debug("recruitment status", slog.Any("status", status))
 
 		if status.CanRecruit {
-			result = append(result, nationName)
+			eligible = append(eligible, nationName)
+		} else {
+			ineligible = append(ineligible, nationName)
 		}
 	}
 
-	return result, nil
+	return eligible, ineligible, nil
 }
